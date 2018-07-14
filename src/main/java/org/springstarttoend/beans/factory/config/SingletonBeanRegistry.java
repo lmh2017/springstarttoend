@@ -1,4 +1,4 @@
-package org.beans.factory.config;
+package org.springstarttoend.beans.factory.config;
 
 /**
  * @author mh_liu

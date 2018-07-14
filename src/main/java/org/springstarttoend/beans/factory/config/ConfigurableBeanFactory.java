@@ -1,6 +1,6 @@
-package org.beans.factory.config;
+package org.springstarttoend.beans.factory.config;
 
-import org.beans.factory.BeanFactory;
+import org.springstarttoend.beans.factory.BeanFactory;
 
 /**
  * @author mh_liu

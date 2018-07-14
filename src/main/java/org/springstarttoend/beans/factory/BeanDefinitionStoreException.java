@@ -1,6 +1,6 @@
-package org.beans.factory;
+package org.springstarttoend.beans.factory;
 
-import org.beans.BeansException;
+import org.springstarttoend.beans.BeansException;
 
 /**
  * @author mh_liu

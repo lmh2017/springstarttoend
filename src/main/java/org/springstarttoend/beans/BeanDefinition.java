@@ -1,4 +1,4 @@
-package org.beans;
+package org.springstarttoend.beans;
 
 /**
  * @author mh_liu

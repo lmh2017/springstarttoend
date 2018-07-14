@@ -1,13 +1,13 @@
-package org.beans.factory.xml;
+package org.springstarttoend.beans.factory.xml;
 
-import org.beans.BeanDefinition;
-import org.beans.factory.BeanDefinitionStoreException;
-import org.beans.factory.support.BeanDefinitionRegistry;
-import org.beans.factory.support.GenericBeanDefinition;
-import org.core.io.Resource;
 import org.dom4j.Document;
 import org.dom4j.Element;
 import org.dom4j.io.SAXReader;
+import org.springstarttoend.beans.BeanDefinition;
+import org.springstarttoend.beans.factory.BeanDefinitionStoreException;
+import org.springstarttoend.beans.factory.support.BeanDefinitionRegistry;
+import org.springstarttoend.beans.factory.support.GenericBeanDefinition;
+import org.springstarttoend.io.Resource;
 
 import java.io.IOException;
 import java.io.InputStream;

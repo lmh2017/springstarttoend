@@ -1,7 +1,7 @@
-package org.beans.factory.support;
+package org.springstarttoend.beans.factory.support;
 
-import org.beans.factory.config.SingletonBeanRegistry;
-import org.utils.Assert;
+import org.springstarttoend.beans.factory.config.SingletonBeanRegistry;
+import org.springstarttoend.utils.Assert;
 
 import java.util.Map;
 import java.util.concurrent.ConcurrentHashMap;

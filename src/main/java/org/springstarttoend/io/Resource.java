@@ -1,4 +1,4 @@
-package org.core.io;
+package org.springstarttoend.io;
 
 import java.io.IOException;
 import java.io.InputStream;

@@ -1,6 +1,6 @@
-package org.core.io;
+package org.springstarttoend.io;
 
-import org.utils.ClassUtils;
+import org.springstarttoend.utils.ClassUtils;
 
 import java.io.FileNotFoundException;
 import java.io.IOException;

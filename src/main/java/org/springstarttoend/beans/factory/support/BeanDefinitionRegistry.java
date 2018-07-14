@@ -1,6 +1,6 @@
-package org.beans.factory.support;
+package org.springstarttoend.beans.factory.support;
 
-import org.beans.BeanDefinition;
+import org.springstarttoend.beans.BeanDefinition;
 
 /**
  * @author mh_liu
