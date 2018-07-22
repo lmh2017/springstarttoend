@@ -30,7 +30,7 @@ public class ClassPathResource implements Resource{
         if(null == inputStream){
             throw new FileNotFoundException(path+" cannot be opened");
         }
-        return null;
+        return inputStream;
     }
 
     public String getDescription() {
