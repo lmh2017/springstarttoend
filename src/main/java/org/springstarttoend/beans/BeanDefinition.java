@@ -1,5 +1,7 @@
 package org.springstarttoend.beans;
 
+import java.util.List;
+
 /**
  * @author mh_liu
  * @create 2018/7/5 下午5:57
@@ -25,5 +27,8 @@ public interface BeanDefinition {
     void setScope(String scope);
 
     String getBeanClassName();
+
+    List<PropertyValue> getPropertValues();
+
 
 }

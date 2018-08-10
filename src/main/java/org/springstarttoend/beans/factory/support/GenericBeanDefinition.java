@@ -1,6 +1,10 @@
 package org.springstarttoend.beans.factory.support;
 
 import org.springstarttoend.beans.BeanDefinition;
+import org.springstarttoend.beans.PropertyValue;
+
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  * @author mh_liu
@@ -14,6 +18,10 @@ public class GenericBeanDefinition implements BeanDefinition {
     private boolean singleton = true;
     private boolean prototype = false;
     private String scope = SCOPE_DEFAULT;
+
+    private List<PropertyValue> propertyValues = new ArrayList<PropertyValue>();
+
+
 
     public GenericBeanDefinition(String id, String beanClassName) {
         this.id = id;
@@ -41,4 +49,13 @@ public class GenericBeanDefinition implements BeanDefinition {
     public String getBeanClassName() {
         return beanClassName;
     }
+
+    public List<PropertyValue> getPropertValues() {
+        return null;
+    }
+
+    public List<PropertyValue> getPropertyValues() {
+        return propertyValues;
+    }
+
 }

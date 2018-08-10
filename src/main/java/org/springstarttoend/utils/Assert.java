@@ -11,4 +11,10 @@ public abstract class Assert {
             throw new IllegalArgumentException(message);
         }
     }
+
+    public static void hasText(String beanName, String s) {
+        if(StringUtils.hasText(s)){
+
+        }
+    }
 }

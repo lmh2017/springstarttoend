@@ -51,6 +51,7 @@ public class XmlBeanDefinitionReader {
                 if(null != e.attributeValue(SCOPE_ATTRIBUTE)){
                     beanDefinition.setScope(e.attributeValue(SCOPE_ATTRIBUTE));
                 }
+                //TODO 实现xml解析property标签的代码
                 this.registry.registerBeanDefinition(id,beanDefinition);
             }
         }catch (Exception e){
