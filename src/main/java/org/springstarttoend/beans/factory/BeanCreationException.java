@@ -1,10 +1,12 @@
 package org.springstarttoend.beans.factory;
 
+import org.springstarttoend.beans.BeansException;
+
 /**
  * @author mh_liu
  * @create 2018/7/11 下午3:38
  */
-public class BeanCreationException extends Throwable {
+public class BeanCreationException extends BeansException {
     private String beanName;
     public BeanCreationException(String msg) {
         super(msg);

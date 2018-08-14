@@ -2,18 +2,16 @@
 <beans>
 
     <bean id="petStore"
-          class="org.litespring.service.v2.PetStoreService" >
+          class="org.springstarttoend.service.v2.PetStoreService" >
 
         <property name="accountDao" ref="accountDao"/>
         <property name="itemDao" ref="itemDao"/>
-        <property name="owner" value="liuxin"/>
-        <property name="version"  value="2"/>
 
     </bean>
 
-    <bean id="accountDao"  class="org.litespring.dao.v2.AccountDao">
+    <bean id="accountDao"  class="org.springstarttoend.dao.v2.AccountDao">
     </bean>
 
-    <bean id="itemDao" class="org.litespring.dao.v2.ItemDao">
+    <bean id="itemDao" class="org.springstarttoend.dao.v2.ItemDao">
     </bean>
 </beans>

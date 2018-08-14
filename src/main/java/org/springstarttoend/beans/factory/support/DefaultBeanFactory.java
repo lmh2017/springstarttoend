@@ -1,10 +1,16 @@
 package org.springstarttoend.beans.factory.support;
 
 import org.springstarttoend.beans.BeanDefinition;
+import org.springstarttoend.beans.PropertyValue;
 import org.springstarttoend.beans.factory.BeanCreationException;
 import org.springstarttoend.beans.factory.config.ConfigurableBeanFactory;
 import org.springstarttoend.utils.ClassUtils;
 
+import java.beans.BeanInfo;
+import java.beans.IntrospectionException;
+import java.beans.Introspector;
+import java.beans.PropertyDescriptor;
+import java.util.List;
 import java.util.Map;
 import java.util.concurrent.ConcurrentHashMap;
 
@@ -51,6 +57,16 @@ public class DefaultBeanFactory extends DefaultSingletonBeanRegistry implements 
     }
 
     private Object createBean(BeanDefinition beanDefinition) throws BeanCreationException {
+        //设置属性
+        Object bean = instantiateBean(beanDefinition);
+        //创建实例
+        populateBean(beanDefinition,bean);
+
+        return bean;
+
+    }
+
+    private Object instantiateBean(BeanDefinition beanDefinition) {
         ClassLoader classLoader = this.getBeanClassLoader();
         String beanName = beanDefinition.getBeanClassName();
         try {
@@ -59,7 +75,36 @@ public class DefaultBeanFactory extends DefaultSingletonBeanRegistry implements 
         } catch (Exception e) {
             throw new BeanCreationException("create bean for "+ beanName +" failed",e);
         }
+    }
 
+    private void populateBean(BeanDefinition beanDefinition, Object bean) {
+        List<PropertyValue> propertyValues = beanDefinition.getPropertValues();
+        if(propertyValues ==null || propertyValues.isEmpty()){
+            return;
+        }
+        BeanDefinitionValueResolver resolver = new BeanDefinitionValueResolver(this);
+//        SimpleTypeConverter converter = new SimpleTypeConverter();
+
+        try {
+            BeanInfo beanInfo = Introspector.getBeanInfo(bean.getClass());
+            PropertyDescriptor[] pds = beanInfo.getPropertyDescriptors();
+            for(PropertyValue propertyValue:propertyValues){
+                String propertyName = propertyValue.getName();
+                Object originalValue = propertyValue.getValue();
+                Object resolverValue = resolver.resolveValueIfNecessary(originalValue);
+
+                for(PropertyDescriptor pd:pds){
+                    if(pd.getName().equals(propertyName)){
+//                        Object convertedValue = converter.convertIfNecessary(resolvedValue, pd.getPropertyType());
+                        pd.getWriteMethod().invoke(bean, resolverValue);
+                        break;
+                    }
+                }
+            }
+
+        } catch (Exception e) {
+            throw new BeanCreationException("Failed to obtain BeanInfo for class [" + beanDefinition.getBeanClassName() + "]", e);
+        }
     }
 
     public void registerBeanDefinition(String beanName, BeanDefinition beanDefinition) {
