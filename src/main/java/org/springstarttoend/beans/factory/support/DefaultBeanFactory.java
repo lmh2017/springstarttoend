@@ -2,12 +2,12 @@ package org.springstarttoend.beans.factory.support;
 
 import org.springstarttoend.beans.BeanDefinition;
 import org.springstarttoend.beans.PropertyValue;
+import org.springstarttoend.beans.SimpleTypeConverter;
 import org.springstarttoend.beans.factory.BeanCreationException;
 import org.springstarttoend.beans.factory.config.ConfigurableBeanFactory;
 import org.springstarttoend.utils.ClassUtils;
 
 import java.beans.BeanInfo;
-import java.beans.IntrospectionException;
 import java.beans.Introspector;
 import java.beans.PropertyDescriptor;
 import java.util.List;
@@ -83,7 +83,7 @@ public class DefaultBeanFactory extends DefaultSingletonBeanRegistry implements 
             return;
         }
         BeanDefinitionValueResolver resolver = new BeanDefinitionValueResolver(this);
-//        SimpleTypeConverter converter = new SimpleTypeConverter();
+        SimpleTypeConverter converter = new SimpleTypeConverter();
 
         try {
             BeanInfo beanInfo = Introspector.getBeanInfo(bean.getClass());
@@ -95,8 +95,8 @@ public class DefaultBeanFactory extends DefaultSingletonBeanRegistry implements 
 
                 for(PropertyDescriptor pd:pds){
                     if(pd.getName().equals(propertyName)){
-//                        Object convertedValue = converter.convertIfNecessary(resolvedValue, pd.getPropertyType());
-                        pd.getWriteMethod().invoke(bean, resolverValue);
+                        Object convertedValue = converter.convertIfNecessary(resolverValue, pd.getPropertyType());
+                        pd.getWriteMethod().invoke(bean, convertedValue);
                         break;
                     }
                 }

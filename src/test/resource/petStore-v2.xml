@@ -6,6 +6,8 @@
 
         <property name="accountDao" ref="accountDao"/>
         <property name="itemDao" ref="itemDao"/>
+        <property name="str" value="mh_liu"/>
+        <property name="index" value="1"/>
 
     </bean>
 

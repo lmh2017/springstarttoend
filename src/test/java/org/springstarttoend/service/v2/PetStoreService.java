@@ -13,6 +13,10 @@ public class PetStoreService {
 
     private ItemDao itemDao;
 
+    private String str;
+
+    private int index;
+
     public AccountDao getAccountDao() {
         return accountDao;
     }
@@ -27,5 +31,21 @@ public class PetStoreService {
 
     public void setItemDao(ItemDao itemDao) {
         this.itemDao = itemDao;
+    }
+
+    public String getStr() {
+        return str;
+    }
+
+    public void setStr(String str) {
+        this.str = str;
+    }
+
+    public int getIndex() {
+        return index;
+    }
+
+    public void setIndex(int index) {
+        this.index = index;
     }
 }
