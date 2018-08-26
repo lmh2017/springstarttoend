@@ -1,6 +1,7 @@
 package org.springstarttoend.beans.factory.support;
 
 import org.springstarttoend.beans.BeanDefinition;
+import org.springstarttoend.beans.ConstructorArgument;
 import org.springstarttoend.beans.PropertyValue;
 
 import java.util.ArrayList;
@@ -20,6 +21,7 @@ public class GenericBeanDefinition implements BeanDefinition {
     private String scope = SCOPE_DEFAULT;
 
     private List<PropertyValue> propertyValues = new ArrayList<>();
+    private ConstructorArgument constructorArgument = new ConstructorArgument();
 
     public GenericBeanDefinition(String id, String beanClassName) {
         this.id = id;
@@ -50,6 +52,21 @@ public class GenericBeanDefinition implements BeanDefinition {
 
     public List<PropertyValue> getPropertValues() {
         return propertyValues;
+    }
+
+    @Override
+    public ConstructorArgument getConstructorArgument() {
+        return this.constructorArgument;
+    }
+
+    @Override
+    public String getID() {
+        return this.id;
+    }
+
+    @Override
+    public boolean hasConstructorArgumentValues() {
+        return !constructorArgument.isEmpty();
     }
 
 }

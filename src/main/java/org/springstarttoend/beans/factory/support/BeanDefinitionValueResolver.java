@@ -1,5 +1,6 @@
 package org.springstarttoend.beans.factory.support;
 
+import org.springstarttoend.beans.factory.BeanFactory;
 import org.springstarttoend.beans.factory.config.RuntimeBeanReference;
 import org.springstarttoend.beans.factory.config.TypedStringValue;
 
@@ -9,10 +10,10 @@ import org.springstarttoend.beans.factory.config.TypedStringValue;
  */
 public class BeanDefinitionValueResolver {
 
-    private final DefaultBeanFactory beanFactory;
+    private final BeanFactory beanFactory;
 
     public BeanDefinitionValueResolver(
-            DefaultBeanFactory beanFactory) {
+            BeanFactory beanFactory) {
 
         this.beanFactory = beanFactory;
     }

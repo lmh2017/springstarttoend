@@ -30,5 +30,9 @@ public interface BeanDefinition {
 
     List<PropertyValue> getPropertValues();
 
+    ConstructorArgument getConstructorArgument();
 
+    String getID();
+
+    boolean hasConstructorArgumentValues();
 }
