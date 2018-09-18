@@ -8,8 +8,8 @@ import org.springstarttoend.beans.factory.config.RuntimeBeanReference;
 import org.springstarttoend.beans.factory.config.TypedStringValue;
 import org.springstarttoend.beans.factory.support.DefaultBeanFactory;
 import org.springstarttoend.beans.factory.xml.XmlBeanDefinitionReader;
-import org.springstarttoend.io.ClassPathResource;
-import org.springstarttoend.io.Resource;
+import org.springstarttoend.core.io.ClassPathResource;
+import org.springstarttoend.core.io.Resource;
 
 import java.util.List;
 

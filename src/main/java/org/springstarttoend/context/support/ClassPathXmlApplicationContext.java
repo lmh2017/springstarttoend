@@ -1,7 +1,7 @@
 package org.springstarttoend.context.support;
 
-import org.springstarttoend.io.ClassPathResource;
-import org.springstarttoend.io.Resource;
+import org.springstarttoend.core.io.ClassPathResource;
+import org.springstarttoend.core.io.Resource;
 
 public class ClassPathXmlApplicationContext extends AbstractApplicationContext {
 

@@ -7,7 +7,7 @@ import org.springstarttoend.beans.PropertyValue;
 import org.springstarttoend.beans.factory.config.RuntimeBeanReference;
 import org.springstarttoend.beans.factory.support.DefaultBeanFactory;
 import org.springstarttoend.beans.factory.xml.XmlBeanDefinitionReader;
-import org.springstarttoend.io.ClassPathResource;
+import org.springstarttoend.core.io.ClassPathResource;
 
 import java.util.List;
 

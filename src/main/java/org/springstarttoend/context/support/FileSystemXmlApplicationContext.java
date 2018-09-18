@@ -1,7 +1,7 @@
 package org.springstarttoend.context.support;
 
-import org.springstarttoend.io.FileSystemResource;
-import org.springstarttoend.io.Resource;
+import org.springstarttoend.core.io.FileSystemResource;
+import org.springstarttoend.core.io.Resource;
 
 public class FileSystemXmlApplicationContext extends AbstractApplicationContext {
 

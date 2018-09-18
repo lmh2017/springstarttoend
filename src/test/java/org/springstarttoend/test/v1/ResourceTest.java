@@ -2,8 +2,8 @@ package org.springstarttoend.test.v1;
 
 import org.junit.Assert;
 import org.junit.Test;
-import org.springstarttoend.io.ClassPathResource;
-import org.springstarttoend.io.Resource;
+import org.springstarttoend.core.io.ClassPathResource;
+import org.springstarttoend.core.io.Resource;
 
 import java.io.IOException;
 import java.io.InputStream;

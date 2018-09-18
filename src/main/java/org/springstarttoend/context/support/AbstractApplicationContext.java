@@ -3,7 +3,7 @@ package org.springstarttoend.context.support;
 import org.springstarttoend.beans.factory.support.DefaultBeanFactory;
 import org.springstarttoend.beans.factory.xml.XmlBeanDefinitionReader;
 import org.springstarttoend.context.ApplicationContext;
-import org.springstarttoend.io.Resource;
+import org.springstarttoend.core.io.Resource;
 import org.springstarttoend.utils.ClassUtils;
 
 public abstract class AbstractApplicationContext implements ApplicationContext{
