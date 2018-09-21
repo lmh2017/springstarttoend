@@ -1,6 +1,6 @@
 package org.springstarttoend.context;
 
-import org.springstarttoend.beans.factory.config.ConfigurableBeanFactory;
+import org.springstarttoend.beans.factory.BeanFactory;
 
-public interface ApplicationContext extends ConfigurableBeanFactory {
+public interface ApplicationContext extends BeanFactory {
 }

@@ -16,6 +16,7 @@ public class GenericBeanDefinition implements BeanDefinition {
 
     private String id;
     private String beanClassName;
+    private Class<?> beanClass;
     private boolean singleton = true;
     private boolean prototype = false;
     private String scope = SCOPE_DEFAULT;
@@ -85,4 +86,27 @@ public class GenericBeanDefinition implements BeanDefinition {
         return !constructorArgument.isEmpty();
     }
 
+    @Override
+    public boolean hasBeanClass() {
+        return this.beanClass != null;
+    }
+
+    @Override
+    public Class<?> resolveBeanClass(ClassLoader beanClassLoader) throws ClassNotFoundException {
+        String className = getBeanClassName();
+        if (className == null) {
+            return null;
+        }
+        Class<?> resolvedClass = beanClassLoader.loadClass(className);
+        this.beanClass = resolvedClass;
+        return resolvedClass;
+    }
+
+    public Class<?> getBeanClass() {
+        return beanClass;
+    }
+
+    public void setBeanClass(Class<?> beanClass) {
+        this.beanClass = beanClass;
+    }
 }

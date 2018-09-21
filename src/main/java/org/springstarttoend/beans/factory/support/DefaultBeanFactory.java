@@ -5,6 +5,7 @@ import org.springstarttoend.beans.PropertyValue;
 import org.springstarttoend.beans.SimpleTypeConverter;
 import org.springstarttoend.beans.factory.BeanCreationException;
 import org.springstarttoend.beans.factory.config.ConfigurableBeanFactory;
+import org.springstarttoend.beans.factory.config.DependencyDescriptor;
 import org.springstarttoend.utils.ClassUtils;
 
 import java.beans.BeanInfo;
@@ -67,6 +68,7 @@ public class DefaultBeanFactory extends DefaultSingletonBeanRegistry implements 
     }
 
     private Object instantiateBean(BeanDefinition beanDefinition) {
+        //构造器注入，创建实例时，初始化符合要求参数的构造器
         if(beanDefinition.hasConstructorArgumentValues()){
             ConStructorResolver resolver = new ConStructorResolver(this);
             return resolver.autowireConstructor(beanDefinition);
@@ -137,5 +139,30 @@ public class DefaultBeanFactory extends DefaultSingletonBeanRegistry implements 
 
     public boolean isBeanNameInUse(String beanName) {
         return false;
+    }
+
+    public Object resolveDependency(DependencyDescriptor descriptor) {
+        Class<?> typeToMatch = descriptor.getDependencyType();
+        for(BeanDefinition bd:beanDefinitionMap.values()){
+            //确保BeanDefinition有Class对象
+            resolveBeanClass(bd);
+            Class<?> beanClass = bd.getBeanClass();
+            if(typeToMatch.isAssignableFrom(beanClass)){
+                return this.getBean(bd.getID());
+            }
+        }
+        return null;
+    }
+
+    public void resolveBeanClass(BeanDefinition bd) {
+        if(bd.hasBeanClass()){
+            return;
+        }else {
+            try {
+                bd.resolveBeanClass(this.getBeanClassLoader());
+            } catch (ClassNotFoundException e) {
+                throw new RuntimeException("can't load class:"+bd.getBeanClassName());
+            }
+        }
     }
 }
