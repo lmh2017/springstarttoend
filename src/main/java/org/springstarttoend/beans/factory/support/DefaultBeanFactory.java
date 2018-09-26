@@ -4,13 +4,16 @@ import org.springstarttoend.beans.BeanDefinition;
 import org.springstarttoend.beans.PropertyValue;
 import org.springstarttoend.beans.SimpleTypeConverter;
 import org.springstarttoend.beans.factory.BeanCreationException;
+import org.springstarttoend.beans.factory.config.BeanPostProcessor;
 import org.springstarttoend.beans.factory.config.ConfigurableBeanFactory;
 import org.springstarttoend.beans.factory.config.DependencyDescriptor;
+import org.springstarttoend.beans.factory.config.InstantiationAwareBeanPostProcessor;
 import org.springstarttoend.utils.ClassUtils;
 
 import java.beans.BeanInfo;
 import java.beans.Introspector;
 import java.beans.PropertyDescriptor;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 import java.util.concurrent.ConcurrentHashMap;
@@ -20,6 +23,9 @@ import java.util.concurrent.ConcurrentHashMap;
  * @create 2018/7/10 下午6:14
  */
 public class DefaultBeanFactory extends DefaultSingletonBeanRegistry implements BeanDefinitionRegistry,ConfigurableBeanFactory {
+
+    private List<BeanPostProcessor> beanPostProcessors = new ArrayList<BeanPostProcessor>();
+
 
     private final Map<String,BeanDefinition> beanDefinitionMap = new ConcurrentHashMap<String, BeanDefinition>(64);
     private ClassLoader beanClassLoader;
@@ -84,6 +90,13 @@ public class DefaultBeanFactory extends DefaultSingletonBeanRegistry implements 
     }
 
     private void populateBean(BeanDefinition beanDefinition, Object bean) {
+
+        for(BeanPostProcessor processor : this.getBeanPostProcessors()){
+            if(processor instanceof InstantiationAwareBeanPostProcessor){
+                ((InstantiationAwareBeanPostProcessor)processor).postProcessPropertyValues(bean, beanDefinition.getID());
+            }
+        }
+
         List<PropertyValue> propertyValues = beanDefinition.getPropertValues();
         if(propertyValues ==null || propertyValues.isEmpty()){
             return;
@@ -164,5 +177,12 @@ public class DefaultBeanFactory extends DefaultSingletonBeanRegistry implements 
                 throw new RuntimeException("can't load class:"+bd.getBeanClassName());
             }
         }
+    }
+
+    public void addBeanPostProcessor(BeanPostProcessor postProcessor){
+        this.beanPostProcessors.add(postProcessor);
+    }
+    public List<BeanPostProcessor> getBeanPostProcessors() {
+        return this.beanPostProcessors;
     }
 }

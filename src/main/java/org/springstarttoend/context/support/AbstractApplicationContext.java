@@ -1,5 +1,6 @@
 package org.springstarttoend.context.support;
 
+import org.springstarttoend.beans.factory.annotation.AutowiredAnnotationProcessor;
 import org.springstarttoend.beans.factory.support.DefaultBeanFactory;
 import org.springstarttoend.beans.factory.xml.XmlBeanDefinitionReader;
 import org.springstarttoend.context.ApplicationContext;
@@ -19,6 +20,13 @@ public abstract class AbstractApplicationContext implements ApplicationContext{
         Resource resource =getResourceByPath(configFile);
         xmlBeanDefinitionReader.loadBeanDefinitions(resource);
         factory.setBeanClassLoader(beanClassLoader);
+        registerBeanPostProcessors(factory);
+    }
+
+    protected void registerBeanPostProcessors(DefaultBeanFactory factory){
+        AutowiredAnnotationProcessor postProcessor = new AutowiredAnnotationProcessor();
+        postProcessor.setBeanFactory(factory);
+        factory.addBeanPostProcessor(postProcessor);
     }
 
     public Object getBean(String beanId){

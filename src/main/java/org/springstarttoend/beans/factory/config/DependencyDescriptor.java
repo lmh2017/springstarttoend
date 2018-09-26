@@ -10,6 +10,9 @@ import java.lang.reflect.Field;
  */
 public class DependencyDescriptor {
     private Field field;
+    private String methodName;
+    private Class<?>[] parameterTypes;
+    private int parameterIndex;
     private boolean required;
 
     public DependencyDescriptor(Field field, boolean required) {
@@ -18,9 +21,27 @@ public class DependencyDescriptor {
         this.required = required;
 
     }
+
+    public DependencyDescriptor(String methodName,Class<?>[] parameterTypes,boolean required){
+        this.methodName = methodName;
+        this.parameterTypes = parameterTypes;
+        this.required = required;
+        this.parameterIndex = 0;
+    }
+
+    public Class<?> getParameterType(){
+        return parameterTypes[parameterIndex];
+    }
+
+    public void increaseParameterIndex(){
+        this.parameterIndex += 1;
+    }
+
     public Class<?> getDependencyType(){
         if(this.field != null){
             return field.getType();
+        }else if(parameterTypes.length != 0){
+            return getParameterType();
         }
         throw new RuntimeException("only support field dependency");
     }

@@ -12,16 +12,17 @@ import org.springstarttoend.stereotype.Component;
 @Component(value = "petService")
 public class PetService {
 
-    @Autowired
+//    @Autowired
     private AccountDao accountDao;
 
-    @Autowired
+//    @Autowired
     private ItemDao itemDao;
 
     public AccountDao getAccountDao() {
         return accountDao;
     }
 
+    @Autowired
     public void setAccountDao(AccountDao accountDao) {
         this.accountDao = accountDao;
     }
@@ -30,6 +31,7 @@ public class PetService {
         return itemDao;
     }
 
+    @Autowired
     public void setItemDao(ItemDao itemDao) {
         this.itemDao = itemDao;
     }

@@ -13,13 +13,11 @@ public abstract class ReflectionUtils {
 
     /**
      * Naming prefix for CGLIB-renamed methods.
-     * @see #isCglibRenamedMethod
      */
     private static final String CGLIB_RENAMED_METHOD_PREFIX = "CGLIB$";
 
     /**
      * Pattern for detecting CGLIB-renamed methods.
-     * @see #isCglibRenamedMethod
      */
     private static final Pattern CGLIB_RENAMED_METHOD_PATTERN = Pattern.compile("(.+)\\$\\d+");
 
@@ -163,6 +161,13 @@ public abstract class ReflectionUtils {
                 Modifier.isFinal(field.getModifiers())) && !field.isAccessible()) {
             field.setAccessible(true);
         }
+    }
+
+    public static void makeAccessible(Method method) {
+        if ((!Modifier.isPublic(method.getModifiers()) || !Modifier.isPublic(method.getDeclaringClass().getModifiers())) && !method.isAccessible()) {
+            method.setAccessible(true);
+        }
+
     }
 
 
