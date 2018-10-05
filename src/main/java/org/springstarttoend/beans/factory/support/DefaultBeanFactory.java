@@ -4,6 +4,7 @@ import org.springstarttoend.beans.BeanDefinition;
 import org.springstarttoend.beans.PropertyValue;
 import org.springstarttoend.beans.SimpleTypeConverter;
 import org.springstarttoend.beans.factory.BeanCreationException;
+import org.springstarttoend.beans.factory.NoSuchBeanDefinitionException;
 import org.springstarttoend.beans.factory.config.BeanPostProcessor;
 import org.springstarttoend.beans.factory.config.ConfigurableBeanFactory;
 import org.springstarttoend.beans.factory.config.DependencyDescriptor;
@@ -177,6 +178,16 @@ public class DefaultBeanFactory extends DefaultSingletonBeanRegistry implements 
                 throw new RuntimeException("can't load class:"+bd.getBeanClassName());
             }
         }
+    }
+
+    @Override
+    public Class<?> getType(String name) {
+        BeanDefinition bd = this.getBeanDefinition(name);
+        if(bd == null){
+            throw new NoSuchBeanDefinitionException(name);
+        }
+        resolveBeanClass(bd);
+        return bd.getBeanClass();
     }
 
     public void addBeanPostProcessor(BeanPostProcessor postProcessor){

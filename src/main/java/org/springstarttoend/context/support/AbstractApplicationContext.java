@@ -1,5 +1,6 @@
 package org.springstarttoend.context.support;
 
+import org.springstarttoend.beans.factory.NoSuchBeanDefinitionException;
 import org.springstarttoend.beans.factory.annotation.AutowiredAnnotationProcessor;
 import org.springstarttoend.beans.factory.support.DefaultBeanFactory;
 import org.springstarttoend.beans.factory.xml.XmlBeanDefinitionReader;
@@ -39,5 +40,9 @@ public abstract class AbstractApplicationContext implements ApplicationContext{
 
     public ClassLoader getBeanClassLoader() {
         return (this.beanClassLoader!=null?beanClassLoader: ClassUtils.getDefaultClassLoader());
+    }
+
+    public Class<?> getType(String name) throws NoSuchBeanDefinitionException {
+        return this.factory.getType(name);
     }
 }
