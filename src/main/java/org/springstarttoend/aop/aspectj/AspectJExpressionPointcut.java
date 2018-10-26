@@ -2,10 +2,10 @@ package org.springstarttoend.aop.aspectj;
 
 import org.aspectj.weaver.reflect.ReflectionWorld;
 import org.aspectj.weaver.tools.*;
-import org.springframework.util.StringUtils;
 import org.springstarttoend.aop.MethodMatcher;
 import org.springstarttoend.aop.Pointcut;
 import org.springstarttoend.utils.ClassUtils;
+import org.springstarttoend.utils.StringUtils;
 
 import java.lang.reflect.Method;
 import java.util.HashSet;

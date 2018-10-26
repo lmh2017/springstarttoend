@@ -39,4 +39,12 @@ public class PetService {
         System.out.println("placeOrder");
         MessageTracker.addMsg("placeOrder");
     }
+
+    public void thorwsException(){
+        throw new RuntimeException();
+    }
+
+    public String toString(){
+        return PetService.class.toString();
+    }
 }

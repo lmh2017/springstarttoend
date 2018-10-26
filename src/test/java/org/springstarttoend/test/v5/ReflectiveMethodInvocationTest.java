@@ -76,4 +76,56 @@ public class ReflectiveMethodInvocationTest {
         Assert.assertEquals("commit tx", msgs.get(2));
 
     }
+
+    @Test
+    public void testMethodInvocation2() throws Throwable{
+
+
+        Method targetMethod = PetService.class.getMethod("placeOrder");
+
+        List<MethodInterceptor> interceptors = new ArrayList<MethodInterceptor>();
+        interceptors.add(afterAdvice);
+        interceptors.add(beforeAdvice);
+
+        ReflectiveMethodInvocation mi = new ReflectiveMethodInvocation(petStoreService,targetMethod,new Object[0],interceptors);
+
+        mi.proceed();
+
+
+        List<String> msgs = MessageTracker.getMsgs();
+        Assert.assertEquals(3, msgs.size());
+        Assert.assertEquals("start tx", msgs.get(0));
+        Assert.assertEquals("placeOrder", msgs.get(1));
+        Assert.assertEquals("commit tx", msgs.get(2));
+
+    }
+
+    @Test
+    public void testMethodInvocation3() throws Throwable{
+
+
+        Method targetMethod = PetService.class.getMethod("thorwsException");
+
+        List<MethodInterceptor> interceptors = new ArrayList<MethodInterceptor>();
+        interceptors.add(afterAdvice);
+        interceptors.add(afterThrowingAdvice);
+        interceptors.add(beforeAdvice);
+
+        ReflectiveMethodInvocation mi = new ReflectiveMethodInvocation(petStoreService,targetMethod,new Object[0],interceptors);
+
+        try{
+            mi.proceed();
+        }catch (Throwable e){
+            List<String> msgs = MessageTracker.getMsgs();
+            Assert.assertEquals(2, msgs.size());
+            Assert.assertEquals("start tx", msgs.get(0));
+            Assert.assertEquals("rollback tx", msgs.get(1));
+            return;
+        }
+
+        Assert.fail("没有异常抛出");
+
+
+
+    }
 }

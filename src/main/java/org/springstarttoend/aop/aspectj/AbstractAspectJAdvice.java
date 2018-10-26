@@ -34,7 +34,7 @@ public abstract class AbstractAspectJAdvice implements Advice {
 
     @Override
     public Pointcut getPointcut() {
-        return null;
+        return this.pointcut;
     }
 
     public Method getAdviceMethod() {

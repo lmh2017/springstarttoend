@@ -1,6 +1,6 @@
 package org.springstarttoend.beans;
 
-import org.springframework.util.StringUtils;
+import org.springstarttoend.utils.StringUtils;
 
 import java.lang.reflect.Method;
 
